@@ -595,6 +595,77 @@
 .pwa-guide button{width:100%;min-height:48px;margin-top:8px;border:0;border-radius:14px;background:#111827;color:#fff;font-weight:800;font-family:inherit}
 @media (min-width:1025px){.pwa-guide{display:none!important}}
 
+
+
+/* Newseek update toast — hidden unless an update is actually available */
+.update-toast[hidden] { display: none !important; }
+
+.update-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 9000;
+  transform: translateX(-50%);
+  width: min(560px, calc(100% - 24px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 12px 12px 14px;
+  border: 1px solid rgba(203, 213, 225, .95);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .96);
+  color: var(--text);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, .18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.update-toast-text {
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.update-toast-btn {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .16s ease;
+}
+
+.update-toast-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(.97);
+}
+
+.update-toast-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+  .update-toast {
+    bottom: 12px;
+    width: calc(100% - 20px);
+    padding: 10px 10px 10px 12px;
+    border-radius: 14px;
+  }
+
+  .update-toast-text { font-size: 12px; }
+  .update-toast-btn {
+    min-height: 38px;
+    padding: 0 13px;
+    font-size: 12px;
+  }
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></head>
 <body>
@@ -995,6 +1066,13 @@
 </script>
 
 <script>(()=>{const K="newseek_first_pwa_guide_seen_v1",g=document.getElementById("pwaGuide"),b=document.getElementById("pwaGuideDismiss"),s=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true,t=matchMedia("(pointer: coarse)").matches||navigator.maxTouchPoints>0,m=t&&Math.min(screen.width,screen.height)<=1024;let v=false;try{v=localStorage.getItem(K)==="1"}catch(e){}if(g&&m&&!s&&!v){g.hidden=false;document.documentElement.style.overflow="hidden"}b?.addEventListener("click",()=>{try{localStorage.setItem(K,"1")}catch(e){}g.hidden=true;document.documentElement.style.overflow=""})})();</script>
+
+
+  <div class="update-toast" id="updateToast" role="status" aria-live="polite" hidden>
+    <div class="update-toast-text">نسخه جدید Newseek آماده است</div>
+    <button class="update-toast-btn" id="updateNowBtn" type="button">بروزرسانی</button>
+  </div>
+
 </body>
 </html>
 
