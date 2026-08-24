@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#eef1f8" />
-  <meta name="description" content="Newseek موضوعات موردعلاقه شما را به یک پرامپت حرفه‌ای برای جستجوی آخرین و مهم‌ترین اخبار تبدیل می‌کند." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef1f8">
+  <meta name="description" content="Newseek موضوعات موردعلاقه شما را به یک پرامپت حرفه‌ای برای جستجوی آخرین و مهم‌ترین اخبار تبدیل می‌کند.">
   <title>Newseek</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="newseek-icon-192.png">
@@ -21,12 +21,27 @@
       --text: #172033;
       --muted: #687386;
       --line: #e3e8f0;
+      --line-hover: #cdd4df;
       --primary: #111827;
       --primary-soft: #eef1f6;
       --accent: #4f46e5;
       --accent-soft: #eef2ff;
-      --success: #0f9f6e;
+      --accent-dark: #3730a3;
+      --success: #0d7a57;
+      --success-bg: #d1fae5;
+      --success-border: #a7f3d0;
+      --prompt-text: #243047;
+      --toggle-off: #cbd5e1;
+      --hover-light: #f8fafc;
+      --hover-border: #94a3b8;
+      --active-bg: #f1f5f9;
+      --active-border: #64748b;
+      --copy-btn-bg: #4B5563;
+      --copy-btn-hover: #374151;
+      --field-bg: #fbfcfe;
       --shadow: 0 18px 55px rgba(31, 41, 55, 0.08);
+      --shadow-hover: 0 13px 32px rgba(17, 24, 39, 0.2);
+      --shadow-sm: 0 7px 18px rgba(31, 41, 55, 0.06);
       --radius-lg: 24px;
       --radius-md: 16px;
     }
@@ -88,14 +103,24 @@
       color: var(--text);
       border-radius: 12px;
       padding: 10px 13px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: .18s ease;
       white-space: nowrap;
     }
 
     .ghost-btn:hover,
     .copy-btn:hover {
-      border-color: #cdd4df;
+      border-color: var(--line-hover);
       transform: translateY(-1px);
+    }
+
+    .ghost-btn:focus-visible,
+    .copy-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .panel {
@@ -123,8 +148,8 @@
 
     .status-pill {
       color: var(--success);
-      background: #ecfdf5;
-      border: 1px solid #d1fae5;
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
       border-radius: 999px;
       padding: 6px 9px;
       font-size: 11px;
@@ -142,13 +167,18 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       outline: none;
-      background: #fbfcfe;
+      background: var(--field-bg);
       transition: .18s ease;
     }
 
     .topic-entry-row input:focus {
       border-color: rgba(79, 70, 229, .6);
       box-shadow: 0 0 0 4px rgba(79, 70, 229, .08);
+    }
+
+    .topic-entry-row input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .primary-btn {
@@ -175,10 +205,10 @@
       align-items: center;
       gap: 8px;
       background: var(--accent-soft);
-      color: #3730a3;
+      color: var(--accent-dark);
       border: 1px solid #dfe3ff;
       border-radius: 999px;
-      padding: 8px 11px;
+      padding: 8px 8px;
       font-size: 13px;
       font-weight: 700;
     }
@@ -186,13 +216,24 @@
     .topic-chip button {
       display: grid;
       place-items: center;
-      width: 20px;
-      height: 20px;
+      width: 40px;
+      height: 40px;
       padding: 0;
       border: 0;
       border-radius: 50%;
       background: rgba(55, 48, 163, .08);
       color: inherit;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .topic-chip button:hover {
+      background: rgba(55, 48, 163, .15);
+    }
+
+    .topic-chip button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .empty-state { color: var(--muted); margin: 12px 0 0; font-size: 13px; }
@@ -211,7 +252,7 @@
       padding: 13px;
       border: 1px solid var(--line);
       border-radius: 15px;
-      background: #fbfcfe;
+      background: var(--field-bg);
     }
 
     .field-card > span { font-size: 12px; color: var(--muted); font-weight: 700; }
@@ -241,10 +282,10 @@
     .toggle-ui {
       position: relative;
       flex: 0 0 auto;
-      width: 40px;
-      height: 23px;
+      width: 48px;
+      height: 26px;
       margin-top: 1px;
-      background: #cbd5e1;
+      background: var(--toggle-off);
       border-radius: 999px;
       transition: .2s ease;
     }
@@ -252,8 +293,8 @@
     .toggle-ui::after {
       content: "";
       position: absolute;
-      width: 17px;
-      height: 17px;
+      width: 20px;
+      height: 20px;
       top: 3px;
       right: 3px;
       background: #fff;
@@ -263,7 +304,12 @@
     }
 
     .toggle-row input:checked + .toggle-ui { background: var(--accent); }
-    .toggle-row input:checked + .toggle-ui::after { transform: translateX(-17px); }
+    .toggle-row input:checked + .toggle-ui::after { transform: translateX(-20px); }
+
+    .toggle-row input:focus-visible + .toggle-ui {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
     .toggle-row strong { display: block; font-size: 13px; }
     .toggle-row small { display: block; color: var(--muted); line-height: 1.8; margin-top: 3px; }
 
@@ -336,7 +382,7 @@
       border: 1px solid rgba(214, 221, 234, .9);
       border-radius: 18px;
       background: rgba(255, 255, 255, .68);
-      color: #243047;
+      color: var(--prompt-text);
       line-height: 2;
       padding: 17px;
       outline: none;
@@ -605,6 +651,24 @@
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
 }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+
+      .prompt-output:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+  cursor: pointer;
+
+    .field-card select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
 .pwa-guide-dismiss-overlay:focus-visible{
   outline:3px solid rgba(79,70,229,.45);
   outline-offset:2px;
@@ -706,7 +770,7 @@
 
         <div class="topic-entry-wrap">
           <div class="topic-entry-row">
-            <input id="topicInput" type="text" autocomplete="off" placeholder="مثلاً: Prompt Engineering یا مهندسی پرامپت" aria-label="موضوع خبری" />
+            <input id="topicInput" type="text" autocomplete="off" placeholder="مثلاً: Prompt Engineering یا مهندسی پرامپت" aria-label="موضوع خبری">
             <button id="addTopicBtn" class="primary-btn" type="button">افزودن</button>
           </div>
           <p class="field-help">موضوع‌ها در همین مرورگر ذخیره می‌شوند.</p>
@@ -763,7 +827,7 @@
 
         <div class="advanced-row">
           <label class="toggle-row">
-            <input id="includeCommunity" type="checkbox" />
+            <input id="includeCommunity" type="checkbox">
             <span class="toggle-ui" aria-hidden="true"></span>
             <span>
               <strong>بحث‌های کاربران را هم بررسی کن</strong>
@@ -793,14 +857,14 @@
           </div>
 
           <div class="ai-grid">
-            <button class="ai-btn" data-ai="chatgpt" type="button"><svg class="ai-logo-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-<path fill="currentColor" d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/>
+            <button class="ai-btn" data-ai="chatgpt" type="button" aria-label="Open ChatGPT with copied prompt"><svg class="ai-logo-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<path fill="currentColor" d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z">
 </svg><span>ChatGPT</span></button>
-            <button class="ai-btn" data-ai="claude" type="button"><img class="ai-logo" src="https://cdn.simpleicons.org/claude/D97757" alt="" aria-hidden="true"><span>Claude</span></button>
-            <button class="ai-btn" data-ai="gemini" type="button"><img class="ai-logo" src="https://cdn.simpleicons.org/googlegemini" alt="" aria-hidden="true"><span>Gemini</span></button>
-            <button class="ai-btn" data-ai="perplexity" type="button"><img class="ai-logo" src="https://cdn.simpleicons.org/perplexity/20808D" alt="" aria-hidden="true"><span>Perplexity</span></button>
-            <button class="ai-btn" data-ai="grok" type="button"><svg class="ai-logo-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-<path fill="currentColor" fill-rule="evenodd" d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"/>
+            <button class="ai-btn" data-ai="claude" type="button" aria-label="Open Claude with copied prompt"><img class="ai-logo" src="https://cdn.simpleicons.org/claude/D97757" alt="" aria-hidden="true"><span>Claude</span></button>
+            <button class="ai-btn" data-ai="gemini" type="button" aria-label="Open Google Gemini with copied prompt"><img class="ai-logo" src="https://cdn.simpleicons.org/googlegemini" alt="" aria-hidden="true"><span>Gemini</span></button>
+            <button class="ai-btn" data-ai="perplexity" type="button" aria-label="Open Perplexity AI with copied prompt"><img class="ai-logo" src="https://cdn.simpleicons.org/perplexity/20808D" alt="" aria-hidden="true"><span>Perplexity</span></button>
+            <button class="ai-btn" data-ai="grok" type="button" aria-label="Open Grok with copied prompt"><svg class="ai-logo-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<path fill="currentColor" fill-rule="evenodd" d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815">
 </svg><span>Grok</span></button>
           </div>
         </section>
